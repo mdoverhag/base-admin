@@ -1,7 +1,9 @@
 import React from "react";
 
+import ContentDiv from "./components/lib/ContentDiv";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider } from "@material-ui/core/styles";
+import RootDiv from "./components/lib/RootDiv";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 
@@ -14,7 +16,9 @@ const theme = createMuiTheme({
 const App = props => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
-    <div>Hello Greenfield</div>
+    <RootDiv>
+      <ContentDiv withPaper>Hello Greenfield</ContentDiv>
+    </RootDiv>
   </MuiThemeProvider>
 );
 
