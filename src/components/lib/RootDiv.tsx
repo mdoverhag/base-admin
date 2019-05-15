@@ -1,17 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import Grid from "@material-ui/core/Grid";
 
-import { withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
+const styles = createStyles({
   root: {
     flexGrow: 1
   }
 });
 
-const RootDiv = props => (
+interface Props {
+  classes: {
+    root: string;
+  };
+}
+
+const RootDiv: React.FC<Props> = props => (
   <div className={props.classes.root}>
     <Grid item xs={12}>
       <Grid container alignItems="center" direction="column">
@@ -20,9 +25,5 @@ const RootDiv = props => (
     </Grid>
   </div>
 );
-
-RootDiv.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(RootDiv);

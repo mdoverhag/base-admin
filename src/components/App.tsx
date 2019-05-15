@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
@@ -10,11 +9,11 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import ContentDiv from "./components/lib/ContentDiv";
-import RootDiv from "./components/lib/RootDiv";
+import ContentDiv from "./lib/ContentDiv";
+import RootDiv from "./lib/RootDiv";
 
 import { createMuiTheme } from "@material-ui/core/styles";
-import { withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   palette: {
@@ -24,16 +23,10 @@ const theme = createMuiTheme({
     secondary: {
       main: "#e99139"
     }
-  },
-  typography: {
-    useNextVariants: true
   }
 });
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
+const styles = createStyles({
   flex: {
     flex: 1
   },
@@ -43,7 +36,14 @@ const styles = theme => ({
   }
 });
 
-const App = props => (
+interface Props {
+  classes: {
+    flex: string;
+    menuButton: string;
+  };
+}
+
+const App: React.FC<Props> = props => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
     <AppBar position="static">
@@ -66,9 +66,5 @@ const App = props => (
     </RootDiv>
   </MuiThemeProvider>
 );
-
-App.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(App);
