@@ -17,6 +17,8 @@ This projects is bootstrapped with [Create React App](https://github.com/faceboo
 
 [Redux](https://redux.js.org/)/[Reselect](https://github.com/reduxjs/reselect) (not yet) - add boilerplate
 
+[Auth0](https://auth0.com/) (not yet) - opt in to Auth0 using environment variable
+
 
 ## Available Scripts
 
