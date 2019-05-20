@@ -10,6 +10,7 @@ import RootDiv from './lib/RootDiv';
 
 import { createStyles, withStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import * as yup from 'yup';
 
 import history from '../lib/history';
 
@@ -27,17 +28,26 @@ interface Props {
   };
 }
 
+const LoginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Invalid email')
+    .required('Required'),
+  password: yup.string().required('Required')
+});
+
 const Login: React.FC<Props> = props => (
   <RootDiv>
     <ContentDiv withPaper>
       <Formik
         initialValues={{}}
+        validationSchema={LoginSchema}
         onSubmit={() => {
           history.push('/app');
         }}
       >
         {({ dirty, isSubmitting, status }) => (
-          <Form>
+          <Form noValidate>
             <Field
               type="email"
               name="email"
