@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import { Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Router, Redirect, Route, Switch } from "react-router-dom";
 
-import Home from '../containers/Home';
-import Login from '../containers/Login';
-import Logout from '../containers/Logout';
+import Home from "../containers/Home";
+import Login from "../containers/Login";
+import Logout from "../containers/Logout";
 
-import history from '../lib/history';
+import history from "../lib/history";
 
 interface Props {
   isLoggedIn: boolean;
@@ -14,7 +14,6 @@ interface Props {
 
 const Routes: React.FC<Props> = props => (
   <Router history={history}>
-    {console.log(props)}
     {props.isLoggedIn ? (
       <Switch>
         <Route path="/app" component={Home} />

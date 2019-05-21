@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
-import Logout from '../components/Logout';
+import Logout from "../components/Logout";
 
-import { ProfileActionTypes } from '../store/profile/types';
-import { unsetProfile } from '../store/profile/actions';
+import { ProfileActionTypes } from "../store/profile/types";
+import { unsetProfile } from "../store/profile/actions";
 
 const mapDispatchToProps = (dispatch: Dispatch<ProfileActionTypes>) => ({
   unsetProfile: () => dispatch(unsetProfile())

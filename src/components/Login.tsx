@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { Field, Formik, Form } from 'formik';
-import Button from '@material-ui/core/Button';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import { Field, Formik, Form } from "formik";
+import Button from "@material-ui/core/Button";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
-import ContentDiv from './lib/ContentDiv';
-import TextField from './lib/Form/TextField';
-import RootDiv from './lib/RootDiv';
+import ContentDiv from "./lib/ContentDiv";
+import TextField from "./lib/Form/TextField";
+import RootDiv from "./lib/RootDiv";
 
-import { createStyles, withStyles } from '@material-ui/core/styles';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import * as yup from 'yup';
+import { createStyles, withStyles } from "@material-ui/core/styles";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import * as yup from "yup";
 
-import history from '../lib/history';
+import history from "../lib/history";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -32,20 +32,20 @@ interface Props {
 const LoginSchema = yup.object().shape({
   email: yup
     .string()
-    .email('Invalid email')
-    .required('Required'),
-  password: yup.string().required('Required')
+    .email("Invalid email")
+    .required("Required"),
+  password: yup.string().required("Required")
 });
 
 const Login: React.FC<Props> = props => (
   <RootDiv>
     <ContentDiv withPaper>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         validationSchema={LoginSchema}
         onSubmit={values => {
           props.setProfile(values.email);
-          history.push('/app');
+          history.push("/app");
         }}
       >
         {({ dirty, isSubmitting, status }) => (

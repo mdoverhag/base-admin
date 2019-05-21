@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import ContentDiv from './lib/ContentDiv';
-import RootDiv from './lib/RootDiv';
+import ContentDiv from "./lib/ContentDiv";
+import RootDiv from "./lib/RootDiv";
 
 interface Props {
   unsetProfile(): void;

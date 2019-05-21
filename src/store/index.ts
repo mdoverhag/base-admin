@@ -1,6 +1,6 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers } from "redux";
 
-import { profileReducer } from './profile/reducers';
+import { profileReducer } from "./profile/reducers";
 
 const rootReducer = combineReducers({
   profile: profileReducer

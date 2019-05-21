@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { Provider } from 'react-redux';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { Provider } from "react-redux";
 
-import Routes from '../containers/Routes';
+import Routes from "../containers/Routes";
 
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from "@material-ui/core/styles";
 
-import store from '../store';
+import store from "../store";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#232f39'
+      main: "#232f39"
     },
     secondary: {
-      main: '#e99139'
+      main: "#e99139"
     }
   }
 });

@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 
-import ContentDiv from './lib/ContentDiv';
-import RootDiv from './lib/RootDiv';
+import ContentDiv from "./lib/ContentDiv";
+import RootDiv from "./lib/RootDiv";
 
-import { createStyles, withStyles } from '@material-ui/core/styles';
+import { createStyles, withStyles } from "@material-ui/core/styles";
 
-import history from '../lib/history';
+import history from "../lib/history";
 
 const styles = createStyles({
   flex: {
@@ -46,7 +46,7 @@ const Home: React.FC<Props> = props => (
         <Typography variant="h6" color="inherit" className={props.classes.flex}>
           Greenfield React App
         </Typography>
-        <Button color="inherit" onClick={() => history.push('/logout')}>
+        <Button color="inherit" onClick={() => history.push("/logout")}>
           Logout
         </Button>
       </Toolbar>
