@@ -23,6 +23,7 @@ const styles = (theme: Theme) =>
   });
 
 interface Props {
+  setProfile(email: string): void;
   classes: {
     button: string;
   };
@@ -40,9 +41,10 @@ const Login: React.FC<Props> = props => (
   <RootDiv>
     <ContentDiv withPaper>
       <Formik
-        initialValues={{}}
+        initialValues={{ email: '', password: '' }}
         validationSchema={LoginSchema}
-        onSubmit={() => {
+        onSubmit={values => {
+          props.setProfile(values.email);
           history.push('/app');
         }}
       >

@@ -2,10 +2,13 @@ import React from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import { Provider } from 'react-redux';
 
-import Routes from './Routes';
+import Routes from '../containers/Routes';
 
 import { createMuiTheme } from '@material-ui/core/styles';
+
+import store from '../store';
 
 const theme = createMuiTheme({
   palette: {
@@ -21,7 +24,9 @@ const theme = createMuiTheme({
 const App: React.FC = props => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
-    <Routes />
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   </MuiThemeProvider>
 );
 

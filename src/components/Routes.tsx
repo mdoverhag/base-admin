@@ -2,20 +2,31 @@ import React from 'react';
 
 import { Router, Redirect, Route, Switch } from 'react-router-dom';
 
-import Home from './Home';
-import Login from './Login';
-import Logout from './Logout';
+import Home from '../containers/Home';
+import Login from '../containers/Login';
+import Logout from '../containers/Logout';
 
 import history from '../lib/history';
 
-const Routes: React.FC = () => (
+interface Props {
+  isLoggedIn: boolean;
+}
+
+const Routes: React.FC<Props> = props => (
   <Router history={history}>
-    <Switch>
-      <Route path="/app" component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/logout" component={Logout} />
-      <Redirect to="/app" />
-    </Switch>
+    {console.log(props)}
+    {props.isLoggedIn ? (
+      <Switch>
+        <Route path="/app" component={Home} />
+        <Route path="/logout" component={Logout} />
+        <Redirect to="/app" />
+      </Switch>
+    ) : (
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Redirect to="/login" />
+      </Switch>
+    )}
   </Router>
 );
 

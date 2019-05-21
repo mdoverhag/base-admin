@@ -25,6 +25,7 @@ const styles = createStyles({
 });
 
 interface Props {
+  email: string;
   classes: {
     flex: string;
     menuButton: string;
@@ -51,7 +52,9 @@ const Home: React.FC<Props> = props => (
       </Toolbar>
     </AppBar>
     <RootDiv>
-      <ContentDiv withPaper>Hello Greenfield</ContentDiv>
+      <ContentDiv withPaper>
+        Welcome to Greenfield React App {props.email}
+      </ContentDiv>
     </RootDiv>
   </React.Fragment>
 );
