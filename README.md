@@ -1,21 +1,21 @@
 # Greenfield React Project
 
-This projects is bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and adds a few useful libraries and wrappers to quickly get started with a React App.
+[Create React App](https://github.com/facebook/create-react-app) will get you pretty far when setting up a new project. This project is based on a `yarn create react-app` but is more opinionated and will go a bit further in setting up a few useful libraries / helpers for a new React project.
 
 
-## Added libraries / components
+## Libraries / components
 
-[TypeScript](https://www.typescriptlang.org/) - written in TypeScript because the more issues we can address at compile time without having to exercise the components the better
+Written in [TypeScript](https://www.typescriptlang.org/) as it seems like the more scalable option
 
-[lint-staged](https://github.com/okonet/lint-staged)/[Prettier](https://prettier.io/)/[ESLint](https://eslint.org/) - because it helps improve readability and catches errors
+Adds a [lint-staged](https://github.com/okonet/lint-staged) hook to run [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) on each new commit
 
-[React Router](https://reacttraining.com/react-router/) - adds simple routing boilerplate
+Hooks up [React Router](https://reacttraining.com/react-router/) and adds a simple routing boilerplate
 
-[Material-UI](https://material-ui.com/) - layouts and components
+Uses [Material-UI](https://material-ui.com/) for theming, layouts and components
 
-[Formik](https://jaredpalmer.com/formik/)/[Yup](https://github.com/jquense/yup) (not yet) - productive form handling
+[Formik](https://jaredpalmer.com/formik/) and [Yup](https://github.com/jquense/yup) is added (with some glue components for [Material-UI](https://material-ui.com/)) for productive definitions of forms
 
-[Redux](https://redux.js.org/)/[Reselect](https://github.com/reduxjs/reselect) (not yet) - add boilerplate
+[Redux](https://redux.js.org/)/[Reselect](https://github.com/reduxjs/reselect) is often useful but requires a lot of boilerplate to get started, so this is added
 
 [Auth0](https://auth0.com/) (not yet) - opt in to Auth0 using environment variable
 
