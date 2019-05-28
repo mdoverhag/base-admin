@@ -28,7 +28,7 @@ interface Props {
   };
 }
 
-const VerificationSchema = yup.object().shape({
+const VerifySchema = yup.object().shape({
   code: yup.string().required("Required")
 });
 
@@ -37,9 +37,20 @@ const Verify: React.FC<Props> = props => (
     <ContentDiv withPaper>
       <Formik
         initialValues={{ code: "" }}
-        validationSchema={VerificationSchema}
-        onSubmit={values => {
-          auth.verify(values.code);
+        validationSchema={VerifySchema}
+        onSubmit={(values, { setSubmitting, setErrors }) => {
+          auth.verify(values.code).catch(err => {
+            setSubmitting(false);
+            if (err.description === "Wrong email or verification code.") {
+              setErrors({
+                code: "Wrong verification code."
+              });
+            } else {
+              setErrors({
+                code: "Unexpected error, please try again"
+              });
+            }
+          });
         }}
       >
         {({ dirty, isSubmitting, status }) => (

@@ -37,7 +37,7 @@ class Auth {
         this.email = email;
         return res;
       })
-      .catch(console.log);
+      .catch(console.error);
   }
 
   verify(verificationCode: string) {
@@ -47,7 +47,10 @@ class Auth {
       connection: "email",
       email: this.email,
       verificationCode
-    }).catch(console.log);
+    }).catch(err => {
+      console.error(err);
+      throw err;
+    });
   }
 
   handleCallback() {
@@ -67,7 +70,7 @@ class Auth {
           store.dispatch(setProfile({ email: this.email }));
         }
       })
-      .catch(console.log);
+      .catch(console.error);
   }
 
   loggedIn() {

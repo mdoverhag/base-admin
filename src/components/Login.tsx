@@ -43,8 +43,9 @@ const Login: React.FC<Props> = props => (
         initialValues={{ email: "" }}
         validationSchema={LoginSchema}
         onSubmit={values => {
-          auth.login(values.email);
-          history.push("/login/verify");
+          auth.login(values.email).then(() => {
+            history.push("/login/verify");
+          });
         }}
       >
         {({ dirty, isSubmitting, status }) => (
