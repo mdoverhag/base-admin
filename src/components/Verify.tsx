@@ -13,7 +13,6 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import * as yup from "yup";
 
 import auth from "../lib/auth";
-import history from "../lib/history";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -29,30 +28,26 @@ interface Props {
   };
 }
 
-const LoginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Invalid email")
-    .required("Required")
+const VerificationSchema = yup.object().shape({
+  code: yup.string().required("Required")
 });
 
-const Login: React.FC<Props> = props => (
+const Verify: React.FC<Props> = props => (
   <RootDiv>
     <ContentDiv withPaper>
       <Formik
-        initialValues={{ email: "" }}
-        validationSchema={LoginSchema}
+        initialValues={{ code: "" }}
+        validationSchema={VerificationSchema}
         onSubmit={values => {
-          auth.login(values.email);
-          history.push("/login/verify");
+          auth.verify(values.code);
         }}
       >
         {({ dirty, isSubmitting, status }) => (
           <Form noValidate>
             <Field
-              type="email"
-              name="email"
-              label="Email"
+              type="text"
+              name="code"
+              label="Verification Code"
               component={TextField}
             />
             <Button
@@ -63,7 +58,7 @@ const Login: React.FC<Props> = props => (
               className={props.classes.button}
               disabled={isSubmitting || !dirty}
             >
-              Sign In
+              Verify
             </Button>
             {status && status.error ? (
               <FormHelperText error={true}>{status.error}</FormHelperText>
@@ -75,4 +70,4 @@ const Login: React.FC<Props> = props => (
   </RootDiv>
 );
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Verify);

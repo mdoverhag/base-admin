@@ -5,12 +5,10 @@ import { Link } from "react-router-dom";
 import ContentDiv from "./lib/ContentDiv";
 import RootDiv from "./lib/RootDiv";
 
-interface Props {
-  unsetProfile(): void;
-}
+import auth from "../lib/auth";
 
-const Logout: React.FC<Props> = props => {
-  props.unsetProfile();
+const Logout: React.FC = () => {
+  auth.logout();
   return (
     <RootDiv>
       <ContentDiv withPaper>

@@ -2,9 +2,11 @@ import React from "react";
 
 import { Router, Redirect, Route, Switch } from "react-router-dom";
 
+import Callback from "./Callback";
 import Home from "../containers/Home";
-import Login from "../containers/Login";
-import Logout from "../containers/Logout";
+import Login from "./Login";
+import Logout from "./Logout";
+import Verify from "./Verify";
 
 import history from "../lib/history";
 
@@ -22,6 +24,8 @@ const Routes: React.FC<Props> = props => (
       </Switch>
     ) : (
       <Switch>
+        <Route path="/login/verify" component={Verify} />
+        <Route path="/login/callback" component={Callback} />
         <Route path="/login" component={Login} />
         <Redirect to="/login" />
       </Switch>
