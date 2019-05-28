@@ -12,8 +12,7 @@ class Auth {
   auth: WebAuth;
   email?: string;
   constructor() {
-    const url =
-      process.env.URL || process.env.REACT_APP_URL || "http://localhost:3000";
+    const url = defaultTo(process.env.REACT_APP_URL, "http://localhost:3000");
     this.auth = new WebAuth({
       domain: defaultTo(process.env.REACT_APP_AUTH0_DOMAIN, ""),
       clientID: defaultTo(process.env.REACT_APP_AUTH0_CLIENT_ID, ""),
