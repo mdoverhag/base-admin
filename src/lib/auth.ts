@@ -1,8 +1,6 @@
 import { WebAuth, Auth0DecodedHash } from "auth0-js";
 import { Promise } from "bluebird";
-import jwt from "jsonwebtoken";
 import defaultTo from "lodash/defaultTo";
-import get from "lodash/get";
 import pick from "lodash/pick";
 
 import store from "../store";
@@ -74,22 +72,11 @@ class Auth {
   }
 
   loggedIn() {
-    const token = this.getToken();
-    const tokenValid = (token: string) => {
-      const decoded = jwt.decode(token);
-      const exp = get(decoded, "exp", null);
-      if (!exp) {
-        return false;
-      }
-      const date = new Date(0);
-      date.setUTCSeconds(exp);
-      return date.valueOf() > new Date().valueOf();
-    };
-    return token && tokenValid(token);
+    return Boolean(this.getToken());
   }
 
   getToken() {
-    return localStorage.getItem("id_token");
+    return localStorage.getItem("accessToken");
   }
 
   setToken(accessToken: string, idToken: string) {
@@ -112,7 +99,7 @@ class Auth {
 
   logout() {
     delete this.email;
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("id_token");
     localStorage.removeItem("profile");
     store.dispatch(unsetProfile());
