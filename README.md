@@ -1,4 +1,4 @@
-# Greenfield React Project
+# Base Admin
 
 [Create React App](https://github.com/facebook/create-react-app) will get you pretty far when setting up a new project. This project is based on a `yarn create react-app` but is more opinionated and will go a bit further in setting up a few useful libraries / helpers for a new React project.
 
