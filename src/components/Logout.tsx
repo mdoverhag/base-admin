@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import ContentDiv from "./lib/ContentDiv";
 import RootDiv from "./lib/RootDiv";
 
-import auth from "../lib/auth";
+import { unsetProfile } from "../store/profile/actions";
+import store from "../store";
 
 const Logout: React.FC = () => {
-  auth.logout();
+  localStorage.removeItem("accessToken");
+  store.dispatch(unsetProfile());
   return (
     <RootDiv>
       <ContentDiv withPaper>
