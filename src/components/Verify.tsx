@@ -63,7 +63,7 @@ const Verify: React.FC<Props> = props => (
   <RootDiv>
     <ContentDiv withPaper>
       <Mutation<VerifyData, VerifyVariables> mutation={LOGIN}>
-        {(verify, { data }) => {
+        {(verify, { loading, error, data }) => {
           (async () => {
             if (data && data.verify.token) {
               const currToken = await localStorage.getItem("accessToken");
@@ -83,7 +83,7 @@ const Verify: React.FC<Props> = props => (
                 })
               }
             >
-              {({ dirty, isSubmitting, status }) => (
+              {({ dirty }) => (
                 <Form noValidate>
                   <Field
                     type="text"
@@ -97,12 +97,14 @@ const Verify: React.FC<Props> = props => (
                     color="primary"
                     fullWidth
                     className={props.classes.button}
-                    disabled={isSubmitting || !dirty}
+                    disabled={loading || !dirty}
                   >
                     Verify
                   </Button>
-                  {status && status.error ? (
-                    <FormHelperText error={true}>{status.error}</FormHelperText>
+                  {error ? (
+                    <FormHelperText error={true}>
+                      Something went wrong, please try again
+                    </FormHelperText>
                   ) : null}
                 </Form>
               )}

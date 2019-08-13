@@ -68,7 +68,7 @@ const Login: React.FC<Props> = props => {
     <RootDiv>
       <ContentDiv withPaper>
         <Mutation<LoginData, LoginVariables> mutation={LOGIN}>
-          {(login, { data }) => {
+          {(login, { loading, error, data }) => {
             if (data) setVerifyEmail(data.login.email);
             return (
               <Formik
@@ -76,7 +76,7 @@ const Login: React.FC<Props> = props => {
                 validationSchema={LoginSchema}
                 onSubmit={({ email }) => login({ variables: { email } })}
               >
-                {({ dirty, isSubmitting, status }) => (
+                {({ dirty }) => (
                   <Form noValidate>
                     <Field
                       type="email"
@@ -90,13 +90,13 @@ const Login: React.FC<Props> = props => {
                       color="primary"
                       fullWidth
                       className={props.classes.button}
-                      disabled={isSubmitting || !dirty}
+                      disabled={!error && (loading || !dirty)}
                     >
                       Sign In
                     </Button>
-                    {status && status.error ? (
+                    {error ? (
                       <FormHelperText error={true}>
-                        {status.error}
+                        Something went wrong, please try again
                       </FormHelperText>
                     ) : null}
                   </Form>
