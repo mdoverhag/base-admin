@@ -20,9 +20,7 @@ const uri =
 const client = new ApolloClient({
   uri,
   fetchOptions: {
-    fetchOptions: {
-      mode: "no-cors"
-    }
+    credentials: "include"
   }
 });
 
