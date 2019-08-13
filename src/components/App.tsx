@@ -18,7 +18,12 @@ const uri =
     : "https://base-server.mdoverhag.com/api";
 
 const client = new ApolloClient({
-  uri
+  uri,
+  fetchOptions: {
+    fetchOptions: {
+      mode: "no-cors"
+    }
+  }
 });
 
 const theme = createMuiTheme({
