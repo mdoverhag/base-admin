@@ -1,5 +1,7 @@
 import React from "react";
 
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
@@ -9,6 +11,15 @@ import Routes from "../containers/Routes";
 import { createMuiTheme } from "@material-ui/core/styles";
 
 import store from "../store";
+
+const uri =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000/api"
+    : "https://base-server.mdoverhag.com/api";
+
+const client = new ApolloClient({
+  uri
+});
 
 const theme = createMuiTheme({
   palette: {
@@ -24,9 +35,11 @@ const theme = createMuiTheme({
 const App: React.FC = props => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
-    <Provider store={store}>
-      <Routes />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <Routes />
+      </Provider>
+    </ApolloProvider>
   </MuiThemeProvider>
 );
 

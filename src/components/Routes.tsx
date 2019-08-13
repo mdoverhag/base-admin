@@ -2,7 +2,6 @@ import React from "react";
 
 import { Router, Redirect, Route, Switch } from "react-router-dom";
 
-import Callback from "./Callback";
 import Home from "../containers/Home";
 import Login from "./Login";
 import Logout from "./Logout";
@@ -25,7 +24,6 @@ const Routes: React.FC<Props> = props => (
     ) : (
       <Switch>
         <Route path="/login/verify" component={Verify} />
-        <Route path="/login/callback" component={Callback} />
         <Route path="/login" component={Login} />
         <Redirect to="/login" />
       </Switch>

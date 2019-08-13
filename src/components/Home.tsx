@@ -44,7 +44,7 @@ const Home: React.FC<Props> = props => (
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" color="inherit" className={props.classes.flex}>
-          Greenfield React App
+          Base Admin
         </Typography>
         <Button color="inherit" onClick={() => history.push("/logout")}>
           Logout
@@ -52,9 +52,7 @@ const Home: React.FC<Props> = props => (
       </Toolbar>
     </AppBar>
     <RootDiv>
-      <ContentDiv withPaper>
-        Welcome to Greenfield React App {props.email}
-      </ContentDiv>
+      <ContentDiv withPaper>Welcome to Base Admin {props.email}</ContentDiv>
     </RootDiv>
   </React.Fragment>
 );
