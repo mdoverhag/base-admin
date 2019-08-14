@@ -6,10 +6,12 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import { Query } from "react-apollo";
 
 import ContentDiv from "./lib/ContentDiv";
 import RootDiv from "./lib/RootDiv";
 
+import { gql } from "apollo-boost";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 
 import history from "../lib/history";
@@ -23,6 +25,22 @@ const styles = createStyles({
     marginRight: 20
   }
 });
+
+interface Data {
+  greeting: {
+    id: string;
+    email: string;
+  };
+}
+
+const GREETING = gql`
+  {
+    greeting {
+      id
+      email
+    }
+  }
+`;
 
 interface Props {
   email: string;
@@ -53,6 +71,15 @@ const Home: React.FC<Props> = props => (
     </AppBar>
     <RootDiv>
       <ContentDiv withPaper>Welcome to Base Admin {props.email}</ContentDiv>
+      <ContentDiv withPaper>
+        <Query<Data> query={GREETING}>
+          {({ loading, error, data }) => {
+            if (loading) return <pre>Loading...</pre>;
+            if (error) return <pre>{JSON.stringify(error)}</pre>;
+            return <pre>{JSON.stringify(data)}</pre>;
+          }}
+        </Query>
+      </ContentDiv>
     </RootDiv>
   </React.Fragment>
 );

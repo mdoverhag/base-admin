@@ -18,7 +18,15 @@ const uri =
     : "https://base-server.mdoverhag.com/api";
 
 const client = new ApolloClient({
-  uri
+  uri,
+  request: async operation => {
+    const accessToken = await localStorage.getItem("accessToken");
+    if (accessToken) {
+      operation.setContext({
+        headers: { authorization: `Bearer ${accessToken}` }
+      });
+    }
+  }
 });
 
 const theme = createMuiTheme({

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Router, Redirect, Route, Switch } from "react-router-dom";
 
@@ -13,22 +13,34 @@ interface Props {
   isLoggedIn: boolean;
 }
 
-const Routes: React.FC<Props> = props => (
-  <Router history={history}>
-    {props.isLoggedIn ? (
-      <Switch>
-        <Route path="/app" component={Home} />
-        <Route path="/logout" component={Logout} />
-        <Redirect to="/app" />
-      </Switch>
-    ) : (
-      <Switch>
-        <Route path="/login/verify" component={Verify} />
-        <Route path="/login" component={Login} />
-        <Redirect to="/login" />
-      </Switch>
-    )}
-  </Router>
-);
+const Routes: React.FC<Props> = props => {
+  const [hasToken, setHasToken] = useState();
+  useEffect(() => {
+    (async () => {
+      const accessToken = await localStorage.getItem("accessToken");
+      setHasToken(Boolean(accessToken));
+    })();
+  }, [props.isLoggedIn]);
+  if (hasToken === undefined) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <Router history={history}>
+      {hasToken ? (
+        <Switch>
+          <Route path="/app" component={Home} />
+          <Route path="/logout" component={Logout} />
+          <Redirect to="/app" />
+        </Switch>
+      ) : (
+        <Switch>
+          <Route path="/login/verify" component={Verify} />
+          <Route path="/login" component={Login} />
+          <Redirect to="/login" />
+        </Switch>
+      )}
+    </Router>
+  );
+};
 
 export default Routes;
