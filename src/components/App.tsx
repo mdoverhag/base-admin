@@ -14,7 +14,7 @@ import store from "../store";
 
 const uri =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:3000/api"
+    ? "http://localhost:4000/api"
     : "https://base-server.mdoverhag.com/api";
 
 const client = new ApolloClient({
