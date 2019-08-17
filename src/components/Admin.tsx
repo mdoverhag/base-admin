@@ -1,6 +1,7 @@
 import React from "react";
 
 import {
+  AUTH_LOGOUT,
   Admin as ReactAdmin,
   Datagrid,
   List,
@@ -13,6 +14,8 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { createStyles, withStyles, withTheme } from "@material-ui/core/styles";
 import buildGraphQLProvider from "ra-data-graphql";
 import { withApollo, WithApolloClient } from "react-apollo";
+
+import history from "../lib/history";
 
 const styles = createStyles({
   flex: {
@@ -52,6 +55,12 @@ export const UserList: React.FC = props => (
     </Datagrid>
   </List>
 );
+
+const authProvider = (type: any, params: any) => {
+  if (type === AUTH_LOGOUT) {
+    history.push("/logout");
+  }
+};
 
 class Admin extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -102,7 +111,12 @@ class Admin extends React.Component<Props, State> {
       return <pre>Loading...</pre>;
     }
     return (
-      <ReactAdmin theme={theme} title="Base Admin" dataProvider={dataProvider}>
+      <ReactAdmin
+        authProvider={authProvider}
+        theme={theme}
+        title="Base Admin"
+        dataProvider={dataProvider}
+      >
         <Resource name="User" list={UserList} />
       </ReactAdmin>
     );

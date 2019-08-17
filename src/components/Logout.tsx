@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -9,10 +9,12 @@ import { unsetProfile } from "../store/profile/actions";
 import store from "../store";
 
 const Logout: React.FC = () => {
-  (async () => {
-    await localStorage.removeItem("accessToken");
-    store.dispatch(unsetProfile());
-  })();
+  useEffect(() => {
+    (async () => {
+      await localStorage.removeItem("accessToken");
+      store.dispatch(unsetProfile());
+    })();
+  });
   return (
     <RootDiv>
       <ContentDiv withPaper>
