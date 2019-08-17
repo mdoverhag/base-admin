@@ -9,8 +9,10 @@ import { unsetProfile } from "../store/profile/actions";
 import store from "../store";
 
 const Logout: React.FC = () => {
-  localStorage.removeItem("accessToken");
-  store.dispatch(unsetProfile());
+  (async () => {
+    await localStorage.removeItem("accessToken");
+    store.dispatch(unsetProfile());
+  })();
   return (
     <RootDiv>
       <ContentDiv withPaper>

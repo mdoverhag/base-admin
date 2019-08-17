@@ -26,7 +26,7 @@ const Routes: React.FC<Props> = props => {
   }
   return (
     <Router history={history}>
-      {hasToken ? (
+      {props.isLoggedIn && hasToken ? (
         <Switch>
           <Route path="/app" component={Home} />
           <Route path="/logout" component={Logout} />
