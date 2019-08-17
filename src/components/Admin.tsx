@@ -52,6 +52,7 @@ export const UserList: React.FC = props => (
   <List {...props}>
     <Datagrid>
       <TextField source="email" />
+      <TextField source="role" />
     </Datagrid>
   </List>
 );
@@ -91,6 +92,7 @@ class Admin extends React.Component<Props, State> {
               users {
                 id
                 email
+                role
               }
             }
           `,
