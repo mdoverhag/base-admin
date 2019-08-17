@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Router, Redirect, Route, Switch } from "react-router-dom";
 
-import Home from "../containers/Home";
+import Admin from "../containers/Admin";
 import Login from "./Login";
 import Logout from "./Logout";
 import Verify from "./Verify";
@@ -28,7 +28,7 @@ const Routes: React.FC<Props> = props => {
     <Router history={history}>
       {props.isLoggedIn && hasToken ? (
         <Switch>
-          <Route path="/app" component={Home} />
+          <Route path="/app" component={Admin} />
           <Route path="/logout" component={Logout} />
           <Redirect to="/app" />
         </Switch>

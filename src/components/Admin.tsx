@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Admin, Datagrid, List, Resource, TextField } from "react-admin";
+import {
+  Admin as ReactAdmin,
+  Datagrid,
+  List,
+  Resource,
+  TextField
+} from "react-admin";
 
 import { gql } from "apollo-boost";
 import { createStyles, withStyles } from "@material-ui/core/styles";
@@ -24,14 +30,14 @@ interface Data {
   };
 }
 
-interface HomeProps {
+interface AdminProps {
   classes: {
     flex: string;
     menuButton: string;
   };
 }
 
-type Props = WithApolloClient<HomeProps>;
+type Props = WithApolloClient<AdminProps>;
 
 interface State {
   dataProvider: any;
@@ -45,7 +51,7 @@ export const UserList: React.FC = props => (
   </List>
 );
 
-class Home extends React.Component<Props, State> {
+class Admin extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -93,11 +99,11 @@ class Home extends React.Component<Props, State> {
       return <pre>Loading...</pre>;
     }
     return (
-      <Admin dataProvider={dataProvider}>
+      <ReactAdmin dataProvider={dataProvider}>
         <Resource name="User" list={UserList} />
-      </Admin>
+      </ReactAdmin>
     );
   }
 }
 
-export default withApollo(withStyles(styles)(Home));
+export default withApollo(withStyles(styles)(Admin));
