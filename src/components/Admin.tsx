@@ -9,7 +9,8 @@ import {
 } from "react-admin";
 
 import { gql } from "apollo-boost";
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { createStyles, withStyles, withTheme } from "@material-ui/core/styles";
 import buildGraphQLProvider from "ra-data-graphql";
 import { withApollo, WithApolloClient } from "react-apollo";
 
@@ -31,6 +32,7 @@ interface Data {
 }
 
 interface AdminProps {
+  theme: Theme;
   classes: {
     flex: string;
     menuButton: string;
@@ -94,16 +96,17 @@ class Admin extends React.Component<Props, State> {
   }
 
   render() {
+    const { theme } = this.props;
     const { dataProvider } = this.state;
     if (!dataProvider) {
       return <pre>Loading...</pre>;
     }
     return (
-      <ReactAdmin title="Base Admin" dataProvider={dataProvider}>
+      <ReactAdmin theme={theme} title="Base Admin" dataProvider={dataProvider}>
         <Resource name="User" list={UserList} />
       </ReactAdmin>
     );
   }
 }
 
-export default withApollo(withStyles(styles)(Admin));
+export default withApollo(withTheme(withStyles(styles)(Admin)));
