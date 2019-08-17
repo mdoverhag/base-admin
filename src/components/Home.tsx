@@ -71,7 +71,7 @@ class Home extends React.Component<Props, State> {
         return {
           query: gql`
             {
-              greeting {
+              users {
                 id
                 email
               }
@@ -79,8 +79,8 @@ class Home extends React.Component<Props, State> {
           `,
           variables: params,
           parseResponse: (response: any) => ({
-            data: [response.data.greeting],
-            total: 1
+            data: response.data.users,
+            total: response.data.users.length
           })
         };
       }
