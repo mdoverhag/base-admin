@@ -99,7 +99,7 @@ class Admin extends React.Component<Props, State> {
       return <pre>Loading...</pre>;
     }
     return (
-      <ReactAdmin dataProvider={dataProvider}>
+      <ReactAdmin title="Base Admin" dataProvider={dataProvider}>
         <Resource name="User" list={UserList} />
       </ReactAdmin>
     );
