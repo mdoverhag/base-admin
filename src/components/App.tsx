@@ -29,8 +29,10 @@ const authMiddleware = setContext((req, { headers }) => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
     return {
-      ...headers,
-      authorization: `Bearer ${accessToken}`
+      headers: {
+        ...headers,
+        authorization: `Bearer ${accessToken}`
+      }
     };
   }
 });
