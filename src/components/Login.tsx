@@ -9,7 +9,7 @@ import ContentDiv from "./lib/ContentDiv";
 import TextField from "./lib/Form/TextField";
 import RootDiv from "./lib/RootDiv";
 
-import { gql } from "apollo-boost";
+import gql from "graphql-tag";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import * as yup from "yup";

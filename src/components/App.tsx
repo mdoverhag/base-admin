@@ -1,6 +1,11 @@
 import React from "react";
 
-import ApolloClient from "apollo-boost";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient } from "apollo-client";
+import { concat } from "apollo-link";
+import { setContext } from "apollo-link-context";
+import { onError } from "apollo-link-error";
+import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider } from "@material-ui/core/styles";
@@ -10,6 +15,7 @@ import Routes from "../containers/Routes";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 
+import { unsetProfile } from "../store/profile/actions";
 import store from "../store";
 
 const uri =
@@ -17,16 +23,40 @@ const uri =
     ? "http://localhost:4000/api"
     : "https://base-server.mdoverhag.com/api";
 
-const client = new ApolloClient({
-  uri,
-  request: async operation => {
-    const accessToken = await localStorage.getItem("accessToken");
-    if (accessToken) {
-      operation.setContext({
-        headers: { authorization: `Bearer ${accessToken}` }
-      });
-    }
+const httpLink = new HttpLink({ uri });
+
+const authMiddleware = setContext((req, { headers }) => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    return {
+      ...headers,
+      authorization: `Bearer ${accessToken}`
+    };
   }
+});
+
+const errorAfterware = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path }) => {
+      if (message === "unauthorized") {
+        localStorage.removeItem("accessToken");
+        store.dispatch(unsetProfile());
+      }
+      console.error(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      );
+    });
+  }
+  if (networkError) {
+    console.error(`[Network error]: ${networkError}`);
+  }
+});
+
+const wares = errorAfterware.concat(authMiddleware);
+
+const client = new ApolloClient({
+  link: concat(wares, httpLink),
+  cache: new InMemoryCache()
 });
 
 const theme = createMuiTheme({

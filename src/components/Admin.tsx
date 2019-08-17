@@ -9,7 +9,7 @@ import {
   TextField
 } from "react-admin";
 
-import { gql } from "apollo-boost";
+import gql from "graphql-tag";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { createStyles, withStyles, withTheme } from "@material-ui/core/styles";
 import buildGraphQLProvider from "ra-data-graphql";
