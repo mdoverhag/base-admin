@@ -115,9 +115,10 @@ class Admin extends React.Component<Props, State> {
         authProvider={authProvider}
         theme={theme}
         title="Base Admin"
+        history={history}
         dataProvider={dataProvider}
       >
-        <Resource name="User" list={UserList} />
+        <Resource name="user" list={UserList} />
       </ReactAdmin>
     );
   }

@@ -8,6 +8,8 @@ import Logout from "./Logout";
 import Verify from "./Verify";
 
 import history from "../lib/history";
+import { setProfile } from "../store/profile/actions";
+import store from "../store";
 
 interface Props {
   isLoggedIn: boolean;
@@ -16,8 +18,11 @@ interface Props {
 const Routes: React.FC<Props> = props => {
   const [hasToken, setHasToken] = useState();
   useEffect(() => {
-    (async () => {
-      const accessToken = await localStorage.getItem("accessToken");
+    (() => {
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        store.dispatch(setProfile({ email: "" }));
+      }
       setHasToken(Boolean(accessToken));
     })();
   }, [props.isLoggedIn]);
@@ -28,9 +33,9 @@ const Routes: React.FC<Props> = props => {
     <Router history={history}>
       {hasToken ? (
         <Switch>
-          <Route path="/app" component={Admin} />
           <Route path="/logout" component={Logout} />
-          <Redirect to="/app" />
+          <Route path="/user" component={Admin} />
+          <Redirect to="/user" />
         </Switch>
       ) : (
         <Switch>

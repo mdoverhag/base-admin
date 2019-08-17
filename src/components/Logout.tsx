@@ -10,8 +10,8 @@ import store from "../store";
 
 const Logout: React.FC = () => {
   useEffect(() => {
-    (async () => {
-      await localStorage.removeItem("accessToken");
+    (() => {
+      localStorage.removeItem("accessToken");
       store.dispatch(unsetProfile());
     })();
   });
