@@ -29,6 +29,8 @@ const Routes: React.FC<Props> = props => {
   if (hasToken === undefined) {
     return <div>Loading...</div>;
   }
+  //@ts-ignore
+  console.log(window.userToken);
   return (
     <Router history={history}>
       {hasToken ? (
