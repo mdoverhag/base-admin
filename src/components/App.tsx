@@ -19,9 +19,7 @@ import { unsetProfile } from "../store/profile/actions";
 import store from "../store";
 
 const uri =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:4000/api"
-    : "https://base-server.mdoverhag.com/api";
+  process.env.NODE_ENV === "development" ? "http://localhost:4000/api" : "/api";
 
 const httpLink = new HttpLink({ uri });
 
