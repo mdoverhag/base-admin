@@ -10,6 +10,10 @@ import Verify from "./Verify";
 import history from "../lib/history";
 
 const Routes: React.FC = props => {
+  if (process.env.NODE_ENV === "development") {
+    //@ts-ignore
+    window.userToken = localStorage.getItem("userToken");
+  }
   //@ts-ignore
   const userToken = window.userToken;
   return (

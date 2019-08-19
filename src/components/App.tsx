@@ -14,6 +14,8 @@ import Routes from "../components/Routes";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 
+import history from "../lib/history";
+
 const uri =
   process.env.NODE_ENV === "development" ? "http://localhost:4000/api" : "/api";
 
@@ -36,7 +38,7 @@ const errorAfterware = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) => {
       if (message === "unauthorized") {
-        localStorage.removeItem("accessToken");
+        history.push("/logout");
       }
       console.error(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
