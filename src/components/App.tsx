@@ -11,7 +11,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
 
-import Routes from "../containers/Routes";
+import Routes from "../components/Routes";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 
@@ -24,12 +24,13 @@ const uri =
 const httpLink = new HttpLink({ uri });
 
 const authMiddleware = setContext((req, { headers }) => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
+  //@ts-ignore
+  const userToken = window.userToken;
+  if (userToken) {
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${accessToken}`
+        authorization: `Bearer ${userToken}`
       }
     };
   }
