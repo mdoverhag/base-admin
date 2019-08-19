@@ -9,14 +9,10 @@ import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import { Provider } from "react-redux";
 
 import Routes from "../components/Routes";
 
 import { createMuiTheme } from "@material-ui/core/styles";
-
-import { unsetProfile } from "../store/profile/actions";
-import store from "../store";
 
 const uri =
   process.env.NODE_ENV === "development" ? "http://localhost:4000/api" : "/api";
@@ -41,7 +37,6 @@ const errorAfterware = onError(({ graphQLErrors, networkError }) => {
     graphQLErrors.forEach(({ message, locations, path }) => {
       if (message === "unauthorized") {
         localStorage.removeItem("accessToken");
-        store.dispatch(unsetProfile());
       }
       console.error(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
@@ -75,9 +70,7 @@ const App: React.FC = props => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
     <ApolloProvider client={client}>
-      <Provider store={store}>
-        <Routes />
-      </Provider>
+      <Routes />
     </ApolloProvider>
   </MuiThemeProvider>
 );
