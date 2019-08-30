@@ -3,18 +3,26 @@ import React from "react";
 import {
   AUTH_LOGOUT,
   Admin as ReactAdmin,
+  Create,
   Datagrid,
+  DeleteButton,
+  DisabledInput,
+  Edit,
+  EditButton,
   List,
   Resource,
-  TextField
+  SelectInput,
+  SimpleForm,
+  TextField,
+  TextInput
 } from "react-admin";
 
-import gql from "graphql-tag";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { createStyles, withStyles, withTheme } from "@material-ui/core/styles";
 import buildGraphQLProvider from "ra-data-graphql";
 import { withApollo, WithApolloClient } from "react-apollo";
 
+import buildQuery from "../buildQuery";
 import history from "../lib/history";
 
 const styles = createStyles({
@@ -51,10 +59,41 @@ interface State {
 export const UserList: React.FC = props => (
   <List {...props}>
     <Datagrid>
+      <TextField source="id" />
       <TextField source="email" />
+      <TextField source="name" />
       <TextField source="role" />
+      <EditButton />
+      <DeleteButton />
     </Datagrid>
   </List>
+);
+
+export const UserEdit: React.FC = props => (
+  <Edit title="User" {...props}>
+    <SimpleForm>
+      <DisabledInput source="id" />
+      <TextInput source="name" />
+      <TextInput source="email" type="email" />
+      <SelectInput
+        source="role"
+        choices={[{ id: "user", name: "User" }, { id: "admin", name: "Admin" }]}
+      />
+    </SimpleForm>
+  </Edit>
+);
+
+export const UserCreate: React.FC = props => (
+  <Create title="User" {...props}>
+    <SimpleForm>
+      <TextInput source="name" />
+      <TextInput source="email" type="email" />
+      <SelectInput
+        source="role"
+        choices={[{ id: "user", name: "User" }, { id: "admin", name: "Admin" }]}
+      />
+    </SimpleForm>
+  </Create>
 );
 
 const authProvider = (type: any, params: any) => {
@@ -75,34 +114,7 @@ class Admin extends React.Component<Props, State> {
   componentDidMount() {
     buildGraphQLProvider({
       client: this.props.client,
-      buildQuery: (introspectionResults: any, options: any) => (
-        raFetchType: any,
-        resourceName: any,
-        params: any
-      ) => {
-        console.log(this.props.client);
-        console.log(introspectionResults);
-        console.log(options);
-        console.log(raFetchType);
-        console.log(resourceName);
-        console.log(params);
-        return {
-          query: gql`
-            {
-              users {
-                id
-                email
-                role
-              }
-            }
-          `,
-          variables: params,
-          parseResponse: (response: any) => ({
-            data: response.data.users,
-            total: response.data.users.length
-          })
-        };
-      }
+      buildQuery
     }).then((dataProvider: any) => this.setState({ dataProvider }));
   }
 
@@ -120,7 +132,12 @@ class Admin extends React.Component<Props, State> {
         history={history}
         dataProvider={dataProvider}
       >
-        <Resource name="user" list={UserList} />
+        <Resource
+          name="user"
+          list={UserList}
+          edit={UserEdit}
+          create={UserCreate}
+        />
       </ReactAdmin>
     );
   }
