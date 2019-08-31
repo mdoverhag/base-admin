@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-import { Field, Formik, Form } from "formik";
 import Button from "@material-ui/core/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { Field, Formik, Form } from "formik";
 import { Mutation } from "react-apollo";
 
 import ContentDiv from "./lib/ContentDiv";
 import TextField from "./lib/Form/TextField";
-import RootDiv from "./lib/RootDiv";
 
 import gql from "graphql-tag";
 import { createStyles, withStyles } from "@material-ui/core/styles";
@@ -18,6 +19,9 @@ import history from "../lib/history";
 
 const styles = (theme: Theme) =>
   createStyles({
+    title: {
+      textAlign: "center"
+    },
     button: {
       marginTop: theme.spacing(3),
       marginBottom: theme.spacing(1)
@@ -35,6 +39,7 @@ const LOGIN = gql`
 
 interface Props {
   classes: {
+    title: string;
     button: string;
   };
 }
@@ -57,7 +62,7 @@ const LoginSchema = yup.object().shape({
     .required("Required")
 });
 
-const Login: React.FC<Props> = props => {
+const Login: React.FC<Props> = ({ classes }) => {
   const [verifyEmail, setVerifyEmail] = useState();
   useEffect(() => {
     if (verifyEmail) {
@@ -65,48 +70,54 @@ const Login: React.FC<Props> = props => {
     }
   }, [verifyEmail]);
   return (
-    <RootDiv>
-      <ContentDiv withPaper>
-        <Mutation<LoginData, LoginVariables> mutation={LOGIN}>
-          {(login, { loading, error, data }) => {
-            if (data) setVerifyEmail(data.login.email);
-            return (
-              <Formik
-                initialValues={{ email: "" }}
-                validationSchema={LoginSchema}
-                onSubmit={({ email }) => login({ variables: { email } })}
-              >
-                {({ dirty }) => (
-                  <Form noValidate>
-                    <Field
-                      type="email"
-                      name="email"
-                      label="Email"
-                      component={TextField}
-                    />
+    <ContentDiv>
+      <Typography variant="h4" gutterBottom className={classes.title}>
+        Sign in
+      </Typography>
+      <Typography variant="h5" gutterBottom className={classes.title}>
+        Continue to Base Admin
+      </Typography>
+      <Mutation<LoginData, LoginVariables> mutation={LOGIN}>
+        {(login, { loading, error, data }) => {
+          if (data) setVerifyEmail(data.login.email);
+          return (
+            <Formik
+              initialValues={{ email: "" }}
+              validationSchema={LoginSchema}
+              onSubmit={({ email }) => login({ variables: { email } })}
+            >
+              {({ dirty }) => (
+                <Form noValidate>
+                  <Field
+                    type="email"
+                    name="email"
+                    label="Email"
+                    variant="outlined"
+                    component={TextField}
+                  />
+                  <Grid container justify="flex-end">
                     <Button
                       type="submit"
                       variant="contained"
                       color="primary"
-                      fullWidth
-                      className={props.classes.button}
+                      className={classes.button}
                       disabled={!error && (loading || !dirty)}
                     >
-                      Sign In
+                      Next
                     </Button>
-                    {error ? (
-                      <FormHelperText error={true}>
-                        Something went wrong, please try again
-                      </FormHelperText>
-                    ) : null}
-                  </Form>
-                )}
-              </Formik>
-            );
-          }}
-        </Mutation>
-      </ContentDiv>
-    </RootDiv>
+                  </Grid>
+                  {error ? (
+                    <FormHelperText error={true}>
+                      Something went wrong, please try again
+                    </FormHelperText>
+                  ) : null}
+                </Form>
+              )}
+            </Formik>
+          );
+        }}
+      </Mutation>
+    </ContentDiv>
   );
 };
 

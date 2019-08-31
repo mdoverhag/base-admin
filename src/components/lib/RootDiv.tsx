@@ -1,29 +1,39 @@
 import React from "react";
 
+import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 import { createStyles, withStyles } from "@material-ui/core/styles";
+import withWidth, { WithWidth, isWidthUp } from "@material-ui/core/withWidth";
 
-const styles = createStyles({
-  root: {
-    flexGrow: 1
-  }
-});
+const styles = () =>
+  createStyles({
+    root: {
+      height: "100vh"
+    }
+  });
 
-interface Props {
+interface Props extends WithWidth {
   classes: {
     root: string;
   };
 }
 
-const RootDiv: React.FC<Props> = props => (
-  <div className={props.classes.root}>
-    <Grid item xs={12}>
-      <Grid container alignItems="center" direction="column">
-        {props.children}
-      </Grid>
+const RootDiv: React.FC<Props> = ({ classes, children, width }) => {
+  const isMobile = isWidthUp("sm", width);
+  return (
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      className={classes.root}
+    >
+      <Container maxWidth="xs">
+        {isMobile ? <Paper>{children}</Paper> : children}
+      </Container>
     </Grid>
-  </div>
-);
+  );
+};
 
-export default withStyles(styles)(RootDiv);
+export default withWidth()(withStyles(styles)(RootDiv));

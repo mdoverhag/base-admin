@@ -1,37 +1,32 @@
 import React from "react";
 
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+
+import RootDiv from "./RootDiv";
 
 import { createStyles, withStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 const styles = (theme: Theme) =>
   createStyles({
-    paper: theme.mixins.gutters({
-      paddingTop: 16,
-      paddingBottom: 16,
-      marginTop: theme.spacing(3)
+    root: theme.mixins.gutters({
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(6)
     })
   });
 
 interface Props {
-  withPaper: boolean;
   classes: {
-    paper: string;
+    root: string;
   };
 }
 
-const ContentDiv: React.FC<Props> = props => (
-  <Grid item xs={11}>
-    {props.withPaper ? (
-      <Paper className={props.classes.paper} elevation={4}>
-        {props.children}
-      </Paper>
-    ) : (
-      props.children
-    )}
-  </Grid>
+const ContentDiv: React.FC<Props> = ({ classes, children }) => (
+  <RootDiv>
+    <Grid item className={classes.root}>
+      {children}
+    </Grid>
+  </RootDiv>
 );
 
 export default withStyles(styles)(ContentDiv);
