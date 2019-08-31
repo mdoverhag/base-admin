@@ -3,6 +3,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import { Field } from "formik";
 
 import TextField from "../lib/Form/TextField";
@@ -10,16 +11,22 @@ import TextField from "../lib/Form/TextField";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
+import history from "../../lib/history";
+
 const styles = (theme: Theme) =>
   createStyles({
-    button: {
+    buttonContainer: {
       marginTop: theme.spacing(4)
+    },
+    backButtonContainer: {
+      height: "100%"
     }
   });
 
 interface Props {
   classes: {
-    button: string;
+    buttonContainer: string;
+    backButtonContainer: string;
   };
   dirty: boolean;
   isSubmitting: boolean;
@@ -41,12 +48,27 @@ const VerifyLayout: React.FC<Props> = ({
       variant="outlined"
       component={TextField}
     />
-    <Grid container justify="flex-end">
+    <Grid container justify="space-between" className={classes.buttonContainer}>
+      <Grid item>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          className={classes.backButtonContainer}
+        >
+          <Link
+            onClick={() => {
+              history.push("/login");
+            }}
+          >
+            Wrong email?
+          </Link>
+        </Grid>
+      </Grid>
       <Button
         type="submit"
         variant="contained"
         color="primary"
-        className={classes.button}
         disabled={isSubmitting || !dirty}
       >
         Verify

@@ -75,7 +75,7 @@ const Login: React.FC<Props> = ({ classes }) => {
         Sign in
       </Typography>
       <Typography variant="h5" gutterBottom className={classes.title}>
-        Continue to Base Admin
+        to continue to Base Admin
       </Typography>
       <Mutation<LoginData, LoginVariables> mutation={LOGIN}>
         {(login, { loading, error, data }) => {
