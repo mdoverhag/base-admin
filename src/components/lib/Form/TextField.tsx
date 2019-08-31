@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { FieldProps } from 'formik';
+import { FieldProps } from "formik";
 
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 
 export default ({
   field: { ...fields },
@@ -12,9 +12,9 @@ export default ({
   <TextField
     fullWidth
     margin="normal"
-    {...props}
-    {...fields}
     error={Boolean(submitCount > 0 && errors[fields.name])}
     helperText={submitCount > 0 && errors[fields.name]}
+    {...props}
+    {...fields}
   />
 );

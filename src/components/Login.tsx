@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import Button from "@material-ui/core/Button";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Field, Formik, Form } from "formik";
@@ -94,6 +93,12 @@ const Login: React.FC<Props> = ({ classes }) => {
                     label="Email"
                     variant="outlined"
                     component={TextField}
+                    error={error}
+                    helperText={
+                      error
+                        ? "Something went wrong, please try again"
+                        : undefined
+                    }
                   />
                   <Grid container justify="flex-end">
                     <Button
@@ -106,11 +111,6 @@ const Login: React.FC<Props> = ({ classes }) => {
                       Next
                     </Button>
                   </Grid>
-                  {error ? (
-                    <FormHelperText error={true}>
-                      Something went wrong, please try again
-                    </FormHelperText>
-                  ) : null}
                 </Form>
               )}
             </Formik>

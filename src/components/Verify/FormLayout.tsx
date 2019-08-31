@@ -1,7 +1,6 @@
 import React from "react";
 
 import Button from "@material-ui/core/Button";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { Field } from "formik";
@@ -42,11 +41,13 @@ const VerifyLayout: React.FC<Props> = ({
   <React.Fragment>
     <Field type="hidden" name="email" />
     <Field
+      error={error}
       type="text"
       name="otp"
       label="Enter One Time Password"
       variant="outlined"
       component={TextField}
+      helperText={error ? "Something went wrong, please try again" : undefined}
     />
     <Grid container justify="space-between" className={classes.buttonContainer}>
       <Grid item>
@@ -74,11 +75,6 @@ const VerifyLayout: React.FC<Props> = ({
         Verify
       </Button>
     </Grid>
-    {error ? (
-      <FormHelperText error={true}>
-        Something went wrong, please try again
-      </FormHelperText>
-    ) : null}
   </React.Fragment>
 );
 
