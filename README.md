@@ -32,4 +32,4 @@ Will try to login to `http://localhost:4000/api`. Any generated token will be st
 
 ## Production
 
-The project [base_server](https://github.com/mdoverhag/base_server) uses session based authentication for production. During the build of the [base_server](https://github.com/mdoverhag/base_server) Docker image, [base-admin](https://github.com/mdoverhag/base-admin) will be built using `yarn build` and served as static content. `index.html` will be changed into an Phoenix template where a user token can be injected in the presense of a valid session.
+The project [base_server](https://github.com/mdoverhag/base_server) uses session based authentication for production. During the build of the [base_server](https://github.com/mdoverhag/base_server) Docker image, [base-admin](https://github.com/mdoverhag/base-admin) will be built using `yarn build` and served as static content. `index.html` will be changed into an Phoenix template where a user token can be injected in the presence of a valid session.
