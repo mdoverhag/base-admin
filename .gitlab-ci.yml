@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  image: node:10.16.3-alpine
+
+  script:
+    - yarn
+
+test:
+  stage: test
+
+  variables:
+    CI: "true"
+
+  script:
+    - yarn test
