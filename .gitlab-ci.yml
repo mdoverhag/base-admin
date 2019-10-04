@@ -3,6 +3,7 @@ image: node:10.16.3-alpine
 stages:
   - build
   - test
+  - deploy
 
 cache:
   paths:
