@@ -2,10 +2,6 @@ stages:
   - test
   - build
 
-cache:
-  paths:
-  - node_modules/
-
 test:
   stage: test
   image: node:10.16.3-alpine
