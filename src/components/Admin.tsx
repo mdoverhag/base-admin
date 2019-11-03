@@ -85,7 +85,7 @@ export const UserEdit: React.FC = props => (
 
 export const UserCreate: React.FC = props => (
   <Create title="User" {...props}>
-    <SimpleForm>
+    <SimpleForm redirect="list">
       <TextInput source="name" />
       <TextInput source="email" type="email" />
       <SelectInput
