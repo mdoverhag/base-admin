@@ -21,8 +21,10 @@
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "history": "^4.10.1",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
     "lodash": "^4.17.15",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "ra-data-graphql": "^2.9.8",
     "react": "^16.11.0",
     "react-admin": "^2.9.8",
@@ -34,8 +36,6 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.3.5",
-    "husky": "^3.0.9",
-    "lint-staged": "^9.4.2",
     "typescript": "^3.6.4"
   },
   "scripts": {
