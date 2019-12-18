@@ -32,11 +32,11 @@
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
+    "typescript": "^3.7.3",
     "yup": "^0.28.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^8.3.5",
-    "typescript": "^3.6.4"
+    "@types/jsonwebtoken": "^8.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
