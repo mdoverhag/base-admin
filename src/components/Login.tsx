@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
       textAlign: "center"
     },
     button: {
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1)
     }
   });
@@ -85,7 +85,7 @@ const Login: React.FC<Props> = ({ classes }) => {
               validationSchema={LoginSchema}
               onSubmit={({ email }) => login({ variables: { email } })}
             >
-              {({ dirty }) => (
+              {({ dirty, errors, touched }) => (
                 <Form noValidate>
                   <Field
                     type="email"
@@ -93,11 +93,13 @@ const Login: React.FC<Props> = ({ classes }) => {
                     label="Email"
                     variant="outlined"
                     component={TextField}
-                    error={error}
+                    error={error || (errors.email && touched.email)}
                     helperText={
-                      error
+                      errors.email && touched.email
+                        ? errors.email
+                        : error
                         ? "Something went wrong, please try again"
-                        : undefined
+                        : " "
                     }
                   />
                   <Grid container justify="flex-end">

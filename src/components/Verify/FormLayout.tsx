@@ -3,7 +3,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import { Field } from "formik";
+import { Field, FormikErrors, FormikTouched } from "formik";
 
 import TextField from "../lib/Form/TextField";
 
@@ -30,24 +30,34 @@ interface Props {
   dirty: boolean;
   isSubmitting: boolean;
   error: boolean;
+  errors: FormikErrors<{ email: string; otp: string }>;
+  touched: FormikTouched<{ email: string; otp: boolean }>;
 }
 
 const VerifyLayout: React.FC<Props> = ({
   classes,
   dirty,
   isSubmitting,
-  error
+  error,
+  errors,
+  touched
 }) => (
   <React.Fragment>
     <Field type="hidden" name="email" />
     <Field
-      error={error}
       type="text"
       name="otp"
       label="Enter One Time Password"
       variant="outlined"
       component={TextField}
-      helperText={error ? "Something went wrong, please try again" : undefined}
+      error={error || (errors.email && touched.email)}
+      helperText={
+        errors.email && touched.email
+          ? errors.email
+          : error
+          ? "Something went wrong, please try again"
+          : " "
+      }
     />
     <Grid container justify="space-between" className={classes.buttonContainer}>
       <Grid item>

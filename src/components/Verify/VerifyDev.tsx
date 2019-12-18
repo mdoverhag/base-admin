@@ -57,12 +57,14 @@ const Verify: React.FC<Props> = ({ email }) => (
             })
           }
         >
-          {({ dirty }) => (
+          {({ dirty, errors, touched }) => (
             <Form noValidate>
               <FormLayout
                 dirty={dirty}
                 isSubmitting={loading}
                 error={Boolean(error)}
+                errors={errors}
+                touched={touched}
               />
             </Form>
           )}

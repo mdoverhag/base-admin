@@ -32,12 +32,14 @@ const Verify: React.FC<Props> = ({ classes, email }) => (
     validationSchema={VerifySchema}
     onSubmit={() => {}}
   >
-    {({ dirty, isSubmitting, status }) => (
+    {({ dirty, errors, isSubmitting, status, touched }) => (
       <form noValidate>
         <FormLayout
           dirty={dirty}
           isSubmitting={isSubmitting}
           error={Boolean(status && status.error)}
+          errors={errors}
+          touched={touched}
         />
       </form>
     )}
