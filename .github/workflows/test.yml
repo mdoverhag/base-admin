@@ -24,5 +24,11 @@ jobs:
       - name: Download dependencies
         run: yarn
 
+      - name: Run linter
+        run: yarn lint
+
+      - name: Run type-checks
+        run: yarn type-check
+
       - name: Run tests
         run: yarn test
