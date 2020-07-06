@@ -18,8 +18,8 @@ jobs:
         run: yarn
       - name: Build project
         run: yarn build
-      - name: Package release-build
-        run: tar -czvf release-build.tar.gz build/
+      - name: Package build
+        run: tar -czvf build.tar.gz build/
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -37,6 +37,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-build.tar.gz
-          asset_name: release-build.tar.gz
+          asset_path: ./build.tar.gz
+          asset_name: 'Build (tar.gz)'
           asset_content_type: application/zip
