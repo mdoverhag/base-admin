@@ -12,11 +12,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Download dependencies
+        run: yarn
       - name: Build project
-        run: |
-          yarn
-          yarn build
-          tar -czvf release-${{ github.ref }}.tar.gz build
+        run: yarn build
+      - name: Check tgz-filename
+        run: echo release-${{ github.ref }}.tar.gz
+      - name: Check build dir
+        run: ls -al build/
+      - name: Package release-build
+        run: tar -czvf release-${{ github.ref }}.tar.gz build/
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
