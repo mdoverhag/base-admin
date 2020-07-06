@@ -24,7 +24,7 @@ jobs:
       - name: Download dependencies
         run: yarn
 
-      - name: Run linter
+      - name: Run eslint
         run: yarn lint
 
       - name: Run type-checks
