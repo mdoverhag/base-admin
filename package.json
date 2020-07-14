@@ -19,7 +19,7 @@
     "@types/yup": "^0.29.3",
     "apollo-boost": "^0.4.9",
     "formik": "^2.1.5",
-    "graphql": "^15.0.0",
+    "graphql": "^15.3.0",
     "history": "^4.10.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
