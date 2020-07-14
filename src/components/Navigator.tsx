@@ -12,9 +12,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import PeopleIcon from "@material-ui/icons/People";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import Divider from "@material-ui/core/Divider";
 
 interface NavigatorProps {
@@ -54,11 +53,13 @@ const Navigator: React.FC<NavigatorProps> = ({ children, label }) => {
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="secondary" position="fixed">
-        <Toolbar>
+        <Toolbar variant="dense">
           <Typography variant="h6" className={classes.title}>
             {label}
           </Typography>
-          <Button href="/logout">Logout</Button>
+          <Button color="inherit" href="/logout">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -77,19 +78,14 @@ const Navigator: React.FC<NavigatorProps> = ({ children, label }) => {
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem button component={Link} to="/games">
-              <ListItemIcon>
-                <SportsEsportsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Games" />
-            </ListItem>
             <Divider />
             <ListItem button component={Link} to="/users">
               <ListItemIcon>
-                <AccountBoxIcon />
+                <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="User Accounts" />
             </ListItem>
+            <Divider />
           </List>
         </div>
       </Drawer>

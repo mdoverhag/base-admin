@@ -44,17 +44,15 @@ const client = new ApolloClient({
 
 const theme = createMuiTheme({
   palette: {
-    type: "dark",
     primary: {
-      main: "#dfcf99",
+      main: "#232f39",
     },
     secondary: {
-      //main: "#a38d6d"
-      main: "#333333",
+      main: "#232f39",
     },
     background: {
-      paper: "#333333",
-      default: "#212121",
+      paper: "#ffffff",
+      default: "#ffffff",
     },
   },
 });

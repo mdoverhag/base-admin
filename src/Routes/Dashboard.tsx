@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
   return (
     <ContentDiv>
       <Typography variant="h4" gutterBottom className={classes.title}>
-        Welcome to Path of Paper
+        Welcome to Base Admin
       </Typography>
     </ContentDiv>
   );

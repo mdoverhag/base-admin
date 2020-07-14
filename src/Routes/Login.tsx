@@ -64,7 +64,7 @@ const Login: React.FC = () => {
         Sign in
       </Typography>
       <Typography variant="h5" gutterBottom className={classes.title}>
-        to continue to Path of Paper
+        to continue to Base Admin
       </Typography>
       <Formik
         initialValues={{ email: "" }}
