@@ -1,11 +1,11 @@
 import React from "react";
 import { Router, Redirect, Route, Switch } from "react-router-dom";
 
-import AuthenticatedNavigator from "./AuthenticatedNavigator";
-import Login from "./Login";
-import Verify from "./Verify";
+import AuthenticatedNavigator from "Routes/AuthenticatedNavigator";
+import Login from "Routes/Login";
+import Verify from "Routes/Verify";
 
-import history from "../lib/history";
+import history from "lib/history";
 
 const Routes: React.FC = () => {
   if (process.env.NODE_ENV === "development") {

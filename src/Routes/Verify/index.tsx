@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-import Layout from "./Layout";
-import VerifyDev from "./VerifyDev";
-import VerifyProd from "./VerifyProd";
+import Layout from "Routes/Verify/Layout";
+import VerifyDev from "Routes/Verify/VerifyDev";
+import VerifyProd from "Routes/Verify/VerifyProd";
 
 import { get } from "lodash";
 

@@ -5,8 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Field, Formik, Form } from "formik";
 
-import ContentDiv from "../components/ContentDiv";
-import TextField from "../components/TextField";
+import ContentDiv from "components/ContentDiv";
+import TextField from "components/TextField";
 
 import { useMutation } from "@apollo/react-hooks";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,7 +14,7 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import gql from "graphql-tag";
 import * as yup from "yup";
 
-import history from "../lib/history";
+import history from "lib/history";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {

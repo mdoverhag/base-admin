@@ -5,12 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { Field, FormikErrors, FormikTouched } from "formik";
 
-import TextField from "../../components/TextField";
+import TextField from "components/TextField";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
-import history from "../../lib/history";
+import history from "lib/history";
 
 const useStyles = makeStyles((theme: Theme) => ({
   buttonContainer: {

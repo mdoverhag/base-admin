@@ -2,7 +2,7 @@ import React from "react";
 
 import Grid from "@material-ui/core/Grid";
 
-import RootDiv from "./RootDiv";
+import RootDiv from "components/RootDiv";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";

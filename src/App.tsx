@@ -5,11 +5,11 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import ApolloClient from "apollo-boost";
 
-import Routes from "./Routes";
+import Routes from "Routes";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 
-import history from "./lib/history";
+import history from "lib/history";
 
 const uri =
   process.env.NODE_ENV === "development" ? "http://localhost:4000/api" : "/api";

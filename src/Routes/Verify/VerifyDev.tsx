@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { Formik, Form } from "formik";
 
-import FormLayout from "./FormLayout";
+import FormLayout from "Routes/Verify/FormLayout";
 
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";

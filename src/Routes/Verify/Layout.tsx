@@ -5,12 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import MailIcon from "@material-ui/icons/Mail";
 
-import ContentDiv from "../../components/ContentDiv";
+import ContentDiv from "components/ContentDiv";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
-import history from "../../lib/history";
+import history from "lib/history";
 
 const useStyles = makeStyles((theme: Theme) => ({
   chip: {

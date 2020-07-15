@@ -2,7 +2,7 @@ import React from "react";
 
 import { Formik } from "formik";
 
-import FormLayout from "./FormLayout";
+import FormLayout from "Routes/Verify/FormLayout";
 
 import * as yup from "yup";
 
