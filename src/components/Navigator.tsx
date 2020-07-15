@@ -40,10 +40,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerContainer: {
       overflow: "auto",
+      marginTop: theme.spacing(2),
     },
+    main: {
+      flexGrow: 1,
+    },
+    // necessary for content to be below app bar
+    toolbar: theme.mixins.toolbar,
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(2),
     },
   })
 );
@@ -85,11 +91,13 @@ const Navigator: React.FC<NavigatorProps> = ({ children, label }) => {
               </ListItemIcon>
               <ListItemText primary="User Accounts" />
             </ListItem>
-            <Divider />
           </List>
         </div>
       </Drawer>
-      <main className={classes.content}>{children}</main>
+      <main className={classes.main}>
+        <div className={classes.toolbar} />
+        <div className={classes.content}>{children}</div>
+      </main>
     </div>
   );
 };

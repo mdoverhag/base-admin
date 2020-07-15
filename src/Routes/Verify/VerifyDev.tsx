@@ -36,7 +36,10 @@ const VerifySchema = yup.object().shape({
 });
 
 const Verify: React.FC<Props> = ({ email }) => {
-  const [verify, { loading, error, data }] = useMutation(VERIFY);
+  const [verify, { loading, error, data }] = useMutation<
+    VerifyData,
+    VerifyVariables
+  >(VERIFY);
   useEffect(() => {
     (async () => {
       if (data && data.verify.token) {

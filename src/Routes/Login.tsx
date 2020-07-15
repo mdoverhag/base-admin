@@ -52,7 +52,10 @@ const LoginSchema = yup.object().shape({
 
 const Login: React.FC = () => {
   const classes = useStyles();
-  const [login, { loading, error, data }] = useMutation(LOGIN);
+  const [login, { loading, error, data }] = useMutation<
+    LoginData,
+    LoginVariables
+  >(LOGIN);
   useEffect(() => {
     if (data && data.login.email) {
       history.push("/login/verify", { email: data.login.email });
