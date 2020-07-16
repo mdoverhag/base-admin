@@ -7,7 +7,7 @@ import Logout from "Routes/Logout";
 import Users from "Routes/Users";
 
 const AuthenticatedNavigator: React.FC = () => (
-  <Navigator label="Users">
+  <Navigator>
     <Switch>
       <Route path="/logout" component={Logout} />
       <Route path="/dashboard" component={Dashboard} />

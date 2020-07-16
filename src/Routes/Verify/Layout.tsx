@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import MailIcon from "@material-ui/icons/Mail";
 
-import ContentDiv from "components/ContentDiv";
+import LoginContainer from "components/LoginContainer";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
@@ -26,7 +26,7 @@ interface Props {
 const VerifyLayout: React.FC<Props> = ({ children, email }) => {
   const classes = useStyles();
   return (
-    <ContentDiv>
+    <LoginContainer>
       <Grid container justify="center">
         <Typography variant="h5" gutterBottom>
           Check your email!
@@ -49,7 +49,7 @@ const VerifyLayout: React.FC<Props> = ({ children, email }) => {
         />
       </Grid>
       {children}
-    </ContentDiv>
+    </LoginContainer>
   );
 };
 

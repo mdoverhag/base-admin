@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { Field, FormikErrors, FormikTouched } from "formik";
 
-import TextField from "components/TextField";
+import FormText from "components/FormText";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
@@ -45,7 +45,7 @@ const VerifyLayout: React.FC<Props> = ({
         name="otp"
         label="Enter One Time Password"
         variant="outlined"
-        component={TextField}
+        component={FormText}
         error={error || (errors.email && touched.email)}
         helperText={
           errors.email && touched.email

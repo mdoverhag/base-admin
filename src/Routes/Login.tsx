@@ -5,8 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Field, Formik, Form } from "formik";
 
-import ContentDiv from "components/ContentDiv";
-import TextField from "components/TextField";
+import LoginContainer from "components/LoginContainer";
+import FormText from "components/FormText";
 
 import { useMutation } from "@apollo/react-hooks";
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,7 +62,7 @@ const Login: React.FC = () => {
     }
   }, [data]);
   return (
-    <ContentDiv>
+    <LoginContainer>
       <Typography variant="h4" gutterBottom className={classes.title}>
         Sign in
       </Typography>
@@ -81,7 +81,7 @@ const Login: React.FC = () => {
               name="email"
               label="Email"
               variant="outlined"
-              component={TextField}
+              component={FormText}
               error={error || (errors.email && touched.email)}
               helperText={
                 errors.email && touched.email
@@ -105,7 +105,7 @@ const Login: React.FC = () => {
           </Form>
         )}
       </Formik>
-    </ContentDiv>
+    </LoginContainer>
   );
 };
 

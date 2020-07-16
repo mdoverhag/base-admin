@@ -12,13 +12,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import PeopleIcon from "@material-ui/icons/People";
-import DashboardIcon from "@material-ui/icons/Dashboard";
 import Divider from "@material-ui/core/Divider";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import PeopleIcon from "@material-ui/icons/People";
 
-interface NavigatorProps {
-  label: string;
-}
+import history from "lib/history";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerPaper: {
       width: 240,
+      "background-color": theme.palette.background.default,
     },
     drawerContainer: {
       overflow: "auto",
@@ -45,8 +44,6 @@ const useStyles = makeStyles((theme: Theme) =>
     main: {
       flexGrow: 1,
     },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
     content: {
       flexGrow: 1,
       padding: theme.spacing(2),
@@ -54,16 +51,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Navigator: React.FC<NavigatorProps> = ({ children, label }) => {
+const Navigator: React.FC = ({ children }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="secondary" position="fixed">
         <Toolbar variant="dense">
           <Typography variant="h6" className={classes.title}>
-            {label}
+            Base Admin
           </Typography>
-          <Button color="inherit" href="/logout">
+          <Button color="inherit" onClick={() => history.push("/logout")}>
             Logout
           </Button>
         </Toolbar>
@@ -75,7 +72,7 @@ const Navigator: React.FC<NavigatorProps> = ({ children, label }) => {
           paper: classes.drawerPaper,
         }}
       >
-        <Toolbar />
+        <Toolbar variant="dense" />
         <div className={classes.drawerContainer}>
           <List>
             <ListItem button component={Link} to="/dashboard">
@@ -95,7 +92,7 @@ const Navigator: React.FC<NavigatorProps> = ({ children, label }) => {
         </div>
       </Drawer>
       <main className={classes.main}>
-        <div className={classes.toolbar} />
+        <Toolbar variant="dense" />
         <div className={classes.content}>{children}</div>
       </main>
     </div>
