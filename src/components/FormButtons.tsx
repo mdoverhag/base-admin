@@ -9,8 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  button: {
-    margin: theme.spacing(1),
+  cancelButton: {
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -24,15 +24,10 @@ const FormButtons: React.FC<FormButtonsProps> = ({ onCancel, submitLabel }) => {
   return (
     <FormSection>
       <Grid container direction="row" justify="flex-end" alignItems="center">
-        <Button onClick={() => onCancel()} className={classes.button}>
+        <Button onClick={() => onCancel()} className={classes.cancelButton}>
           Cancel
         </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-        >
+        <Button type="submit" variant="contained" color="primary">
           {submitLabel}
         </Button>
       </Grid>
