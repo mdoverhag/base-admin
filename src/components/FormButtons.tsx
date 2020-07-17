@@ -16,9 +16,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface FormButtonsProps {
   onCancel: () => void;
+  submitLabel: string;
 }
 
-const FormButtons: React.FC<FormButtonsProps> = ({ onCancel }) => {
+const FormButtons: React.FC<FormButtonsProps> = ({ onCancel, submitLabel }) => {
   const classes = useStyles();
   return (
     <FormSection>
@@ -32,7 +33,7 @@ const FormButtons: React.FC<FormButtonsProps> = ({ onCancel }) => {
           color="primary"
           className={classes.button}
         >
-          Create User
+          {submitLabel}
         </Button>
       </Grid>
     </FormSection>

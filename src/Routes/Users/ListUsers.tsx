@@ -12,47 +12,25 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 
-import { useQuery } from "@apollo/react-hooks";
 import { makeStyles } from "@material-ui/core/styles";
-import gql from "graphql-tag";
 
 import history from "lib/history";
-
-type User = {
-  id: string;
-  email: string;
-  name: string;
-  role: string;
-};
-
-type Users = Array<User>;
-
-interface UsersData {
-  users: Users;
-}
-
-const GET_USERS = gql`
-  {
-    users {
-      id
-      email
-      name
-      role
-    }
-  }
-`;
+import { useListUsers } from "lib/queries";
 
 const useStyles = makeStyles({
   title: {
     flex: "1 1 100%",
   },
+  tableRow: {
+    cursor: "pointer",
+  },
 });
 
 const ListUsers: React.FC = () => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery<UsersData>(GET_USERS);
-  if (loading) return <span>"Loading..."</span>;
-  if (error) return <span>`Error! ${error.message}`</span>;
+  const { loading, error, data } = useListUsers();
+  if (loading) return <span>Loading...</span>;
+  if (error) return <span>{`Error! ${error.message}`}</span>;
   return (
     <TableContainer component={Paper}>
       <Toolbar>
@@ -78,7 +56,12 @@ const ListUsers: React.FC = () => {
         <TableBody>
           {data &&
             data.users.map(({ id, email, name, role }) => (
-              <TableRow key={id}>
+              <TableRow
+                key={id}
+                hover
+                className={classes.tableRow}
+                onClick={() => history.push(`/users/${id}`)}
+              >
                 <TableCell component="th" scope="row">
                   {id}
                 </TableCell>

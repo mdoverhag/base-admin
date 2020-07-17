@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -10,28 +11,33 @@ import FormSection from "components/FormSection";
 import FormText from "components/FormText";
 
 import history from "lib/history";
-import { useCreateUser } from "lib/queries";
+import { useGetUser, useUpdateUser } from "lib/queries";
 
-const CreateUser: React.FC = () => {
-  const [createUser, { data }] = useCreateUser();
+const UpdateUser: React.FC = () => {
+  const { id } = useParams();
+  const { loading, error, data } = useGetUser(id);
+  const [updateUser, { data: userDataUpdated }] = useUpdateUser();
   useEffect(() => {
-    if (data && data.create_user.email) {
+    if (userDataUpdated && userDataUpdated.update_user.id) {
       history.push("/users");
     }
-  }, [data]);
+  }, [userDataUpdated]);
+  if (loading) return <span>Loading...</span>;
+  if (error) return <span>{`Error! ${error.message}`}</span>;
+  if (!(data && data.get_user)) return <span>{`Error! No data from API`}</span>;
   return (
     <FormContainer>
       <Formik
-        initialValues={{ name: "", email: "", role: "user" }}
-        onSubmit={({ name, email, role }) =>
-          createUser({ variables: { email, name, role } })
-        }
+        initialValues={data.get_user}
+        onSubmit={({ name, email, role }) => {
+          updateUser({ variables: { id, name, email, role } });
+        }}
       >
         {() => (
           <Form noValidate>
             <FormSection>
               <Typography variant="h6" gutterBottom>
-                Create User
+                Update User
               </Typography>
               <Field
                 type="email"
@@ -45,7 +51,7 @@ const CreateUser: React.FC = () => {
             <Divider />
             <FormButtons
               onCancel={() => history.push("/users")}
-              submitLabel="Create User"
+              submitLabel="Update User"
             />
           </Form>
         )}
@@ -54,4 +60,4 @@ const CreateUser: React.FC = () => {
   );
 };
 
-export default CreateUser;
+export default UpdateUser;
