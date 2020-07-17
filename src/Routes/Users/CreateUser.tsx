@@ -6,6 +6,7 @@ import { Field, Formik, Form } from "formik";
 
 import FormButtons from "components/FormButtons";
 import FormContainer from "components/FormContainer";
+import FormDropdown from "components/FormDropdown";
 import FormSection from "components/FormSection";
 import FormText from "components/FormText";
 
@@ -40,7 +41,14 @@ const CreateUser: React.FC = () => {
                 component={FormText}
               />
               <Field name="name" label="Name" component={FormText} />
-              <Field name="role" label="Role" component={FormText} />
+              <Field name="role" label="Role" component={FormDropdown}>
+                <option key={"admin"} value={"admin"}>
+                  Admin
+                </option>
+                <option key={"user"} value={"user"}>
+                  User
+                </option>
+              </Field>
             </FormSection>
             <Divider />
             <FormButtons
