@@ -35,7 +35,7 @@ interface CreateUserVariables {
 }
 
 const CreateUser: React.FC = () => {
-  const [createUser, { error, data }] = useMutation<
+  const [createUser, { data }] = useMutation<
     CreateUserData,
     CreateUserVariables
   >(CREATE_USER);
