@@ -2,31 +2,19 @@ import React from "react";
 
 import { Formik } from "formik";
 
-import FormLayout from "./FormLayout";
+import FormLayout from "Routes/Verify/FormLayout";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import * as yup from "yup";
 
-const styles = (theme: Theme) =>
-  createStyles({
-    button: {
-      marginTop: theme.spacing(4)
-    }
-  });
-
 interface Props {
-  classes: {
-    button: string;
-  };
   email: string;
 }
 
 const VerifySchema = yup.object().shape({
-  otp: yup.string().required("Required")
+  otp: yup.string().required("Required"),
 });
 
-const Verify: React.FC<Props> = ({ classes, email }) => (
+const Verify: React.FC<Props> = ({ email }) => (
   <Formik
     initialValues={{ otp: "", email }}
     validationSchema={VerifySchema}
@@ -46,4 +34,4 @@ const Verify: React.FC<Props> = ({ classes, email }) => (
   </Formik>
 );
 
-export default withStyles(styles)(Verify);
+export default Verify;

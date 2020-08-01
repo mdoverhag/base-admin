@@ -4,9 +4,9 @@ import { FieldProps } from "formik";
 
 import TextField from "@material-ui/core/TextField";
 
-export default ({
+const FormText: React.FC<FieldProps> = ({
   field: { ...fields },
-  form: { submitCount, touched, errors, ...rest },
+  form: { submitCount, touched, errors },
   ...props
 }: FieldProps) => (
   <TextField
@@ -18,3 +18,5 @@ export default ({
     {...fields}
   />
 );
+
+export default FormText;

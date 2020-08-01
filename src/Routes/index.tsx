@@ -1,15 +1,13 @@
 import React from "react";
-
 import { Router, Redirect, Route, Switch } from "react-router-dom";
 
-import Admin from "./Admin";
-import Login from "./Login";
-import Logout from "./Logout";
-import Verify from "./Verify";
+import AuthenticatedNavigator from "Routes/AuthenticatedNavigator";
+import Login from "Routes/Login";
+import Verify from "Routes/Verify";
 
-import history from "../lib/history";
+import history from "lib/history";
 
-const Routes: React.FC = props => {
+const Routes: React.FC = () => {
   if (process.env.NODE_ENV === "development") {
     //@ts-ignore
     window.userToken = localStorage.getItem("userToken");
@@ -19,11 +17,7 @@ const Routes: React.FC = props => {
   return (
     <Router history={history}>
       {userToken ? (
-        <Switch>
-          <Route path="/logout" component={Logout} />
-          <Route path="/user" component={Admin} />
-          <Redirect to="/user" />
-        </Switch>
+        <AuthenticatedNavigator />
       ) : (
         <Switch>
           <Route path="/login/verify" component={Verify} />
