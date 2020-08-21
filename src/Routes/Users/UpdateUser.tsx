@@ -14,8 +14,12 @@ import FormText from "components/FormText";
 import history from "lib/history";
 import { useGetUser, useUpdateUser } from "lib/queries";
 
+interface UpdateUserRouteParams {
+  id: string;
+}
+
 const UpdateUser: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<UpdateUserRouteParams>();
   const { loading, error, data } = useGetUser(id);
   const [updateUser, { data: userDataUpdated }] = useUpdateUser();
   useEffect(() => {
