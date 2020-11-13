@@ -8,10 +8,9 @@ import { Field, Formik, Form } from "formik";
 import LoginContainer from "components/LoginContainer";
 import FormText from "components/FormText";
 
-import { useMutation } from "@apollo/react-hooks";
+import { gql, useMutation } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
-import gql from "graphql-tag";
 import * as yup from "yup";
 
 import history from "lib/history";

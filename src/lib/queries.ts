@@ -1,5 +1,4 @@
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { gql, useQuery, useMutation } from "@apollo/client";
 
 type User = {
   id: string;
