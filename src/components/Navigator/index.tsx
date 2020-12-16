@@ -5,7 +5,9 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import MaterialLink from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -36,6 +38,15 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "auto",
       marginTop: theme.spacing(2),
     },
+    spacer: {
+      flexGrow: 1,
+    },
+    versionContainer: {
+      marginBottom: theme.spacing(1),
+    },
+    versionDivider: {
+      margin: theme.spacing(1),
+    },
     title: {
       flexGrow: 1,
     },
@@ -56,6 +67,8 @@ const Navigator: React.FC = ({ children }) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const isMobileSize = useIsMobileSize();
   const classes = useStyles();
+  const preventDefault = (event: React.SyntheticEvent) =>
+    event.preventDefault();
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="secondary" position="fixed">
@@ -100,6 +113,22 @@ const Navigator: React.FC = ({ children }) => {
             </ListItem>
           </List>
         </div>
+        <div className={classes.spacer}></div>
+        <Grid container direction="row" justify="center" alignItems="flex-end">
+          <div className={classes.versionContainer}>
+            <MaterialLink href="#" onClick={preventDefault}>
+              {process.env.REACT_APP_VERSION}
+            </MaterialLink>
+          </div>
+          <div className={classes.versionDivider}>
+            <Typography variant="body2">/</Typography>
+          </div>
+          <div className={classes.versionContainer}>
+            <MaterialLink href="#" onClick={preventDefault}>
+              v0.1.12
+            </MaterialLink>
+          </div>
+        </Grid>
       </GenericDrawer>
       <main className={classes.main}>
         <Toolbar variant="dense" />
