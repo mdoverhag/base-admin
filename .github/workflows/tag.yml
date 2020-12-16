@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Get version from package.json
         run: echo NPM_PACKAGE_VERSION=v$(cat package.json | jq -r .version) >> $GITHUB_ENV
