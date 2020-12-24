@@ -22,6 +22,7 @@ import GenericDrawer from "components/Navigator/GenericDrawer";
 
 import history from "lib/history";
 import { useIsMobileSize } from "lib/hooks";
+import { useGetVersion } from "lib/queries";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,6 +63,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+const BackendVersion: React.FC = () => {
+  const { data } = useGetVersion();
+  return <span>{data?.get_version?.version}</span>;
+};
 
 const Navigator: React.FC = ({ children }) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
@@ -125,7 +131,7 @@ const Navigator: React.FC = ({ children }) => {
           </div>
           <div className={classes.versionContainer}>
             <MaterialLink href="#" onClick={preventDefault}>
-              v0.1.12
+              <BackendVersion />
             </MaterialLink>
           </div>
         </Grid>

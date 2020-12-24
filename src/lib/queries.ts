@@ -1,5 +1,21 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
 
+interface GetVersionData {
+  get_version: {
+    version: string;
+  };
+}
+
+const GET_VERSION = gql`
+  {
+    get_version {
+      version
+    }
+  }
+`;
+
+export const useGetVersion = () => useQuery<GetVersionData>(GET_VERSION);
+
 type User = {
   id: string;
   email: string;
