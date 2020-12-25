@@ -13,6 +13,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -122,17 +123,21 @@ const Navigator: React.FC = ({ children }) => {
         <div className={classes.spacer}></div>
         <Grid container direction="row" justify="center" alignItems="flex-end">
           <div className={classes.versionContainer}>
-            <MaterialLink href="#" onClick={preventDefault}>
-              {process.env.REACT_APP_VERSION}
-            </MaterialLink>
+            <Tooltip title={process.env.COMMIT_REF} arrow>
+              <MaterialLink href="#" onClick={preventDefault}>
+                {process.env.REACT_APP_VERSION}
+              </MaterialLink>
+            </Tooltip>
           </div>
           <div className={classes.versionDivider}>
             <Typography variant="body2">/</Typography>
           </div>
           <div className={classes.versionContainer}>
-            <MaterialLink href="#" onClick={preventDefault}>
-              <BackendVersion />
-            </MaterialLink>
+            <Tooltip title="" arrow>
+              <MaterialLink href="#" onClick={preventDefault}>
+                <BackendVersion />
+              </MaterialLink>
+            </Tooltip>
           </div>
         </Grid>
       </GenericDrawer>
