@@ -74,6 +74,7 @@ const Navigator: React.FC = ({ children }) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const isMobileSize = useIsMobileSize();
   const classes = useStyles();
+  console.log(process.env);
   const preventDefault = (event: React.SyntheticEvent) =>
     event.preventDefault();
   return (
