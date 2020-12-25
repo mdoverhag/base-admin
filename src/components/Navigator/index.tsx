@@ -67,15 +67,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const BackendVersion: React.FC = () => {
   const { data } = useGetVersion();
-  return <span>{data?.get_version?.version}</span>;
+  return (
+    <Tooltip title={data?.get_version?.commit_sha || ""} arrow>
+      <MaterialLink
+        href="#"
+        onClick={(event: React.SyntheticEvent) => event.preventDefault()}
+      >
+        {data?.get_version?.version || ""}
+      </MaterialLink>
+    </Tooltip>
+  );
 };
 
 const Navigator: React.FC = ({ children }) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const isMobileSize = useIsMobileSize();
   const classes = useStyles();
-  const preventDefault = (event: React.SyntheticEvent) =>
-    event.preventDefault();
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} color="secondary" position="fixed">
@@ -124,7 +131,12 @@ const Navigator: React.FC = ({ children }) => {
         <Grid container direction="row" justify="center" alignItems="flex-end">
           <div className={classes.versionContainer}>
             <Tooltip title={process.env.REACT_APP_COMMIT_REF || ""} arrow>
-              <MaterialLink href="#" onClick={preventDefault}>
+              <MaterialLink
+                href="#"
+                onClick={(event: React.SyntheticEvent) =>
+                  event.preventDefault()
+                }
+              >
                 {process.env.REACT_APP_VERSION}
               </MaterialLink>
             </Tooltip>
@@ -133,11 +145,7 @@ const Navigator: React.FC = ({ children }) => {
             <Typography variant="body2">/</Typography>
           </div>
           <div className={classes.versionContainer}>
-            <Tooltip title="" arrow>
-              <MaterialLink href="#" onClick={preventDefault}>
-                <BackendVersion />
-              </MaterialLink>
-            </Tooltip>
+            <BackendVersion />
           </div>
         </Grid>
       </GenericDrawer>

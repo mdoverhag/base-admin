@@ -3,6 +3,7 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 interface GetVersionData {
   get_version: {
     version: string;
+    commit_sha: string;
   };
 }
 
@@ -10,6 +11,7 @@ const GET_VERSION = gql`
   {
     get_version {
       version
+      commit_sha
     }
   }
 `;
