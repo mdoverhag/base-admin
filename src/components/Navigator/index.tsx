@@ -74,7 +74,6 @@ const Navigator: React.FC = ({ children }) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const isMobileSize = useIsMobileSize();
   const classes = useStyles();
-  console.log(process.env);
   const preventDefault = (event: React.SyntheticEvent) =>
     event.preventDefault();
   return (
@@ -124,7 +123,7 @@ const Navigator: React.FC = ({ children }) => {
         <div className={classes.spacer}></div>
         <Grid container direction="row" justify="center" alignItems="flex-end">
           <div className={classes.versionContainer}>
-            <Tooltip title={process.env.COMMIT_REF || ""} arrow>
+            <Tooltip title={process.env.REACT_APP_COMMIT_REF || ""} arrow>
               <MaterialLink href="#" onClick={preventDefault}>
                 {process.env.REACT_APP_VERSION}
               </MaterialLink>
