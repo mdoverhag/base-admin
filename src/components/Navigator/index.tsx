@@ -123,7 +123,7 @@ const Navigator: React.FC = ({ children }) => {
         <div className={classes.spacer}></div>
         <Grid container direction="row" justify="center" alignItems="flex-end">
           <div className={classes.versionContainer}>
-            <Tooltip title={process.env.COMMIT_REF} arrow>
+            <Tooltip title={process.env.COMMIT_REF || ""} arrow>
               <MaterialLink href="#" onClick={preventDefault}>
                 {process.env.REACT_APP_VERSION}
               </MaterialLink>
