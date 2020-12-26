@@ -55,7 +55,7 @@ const ListUsers: React.FC = () => {
         </TableHead>
         <TableBody>
           {data &&
-            data.users.map(({ id, email, name, role }) => (
+            data.list_users.map(({ id, email, name, role }) => (
               <TableRow
                 key={id}
                 hover

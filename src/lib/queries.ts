@@ -28,12 +28,12 @@ type User = {
 type Users = Array<User>;
 
 interface ListUsersData {
-  users: Users;
+  list_users: Users;
 }
 
 const LIST_USERS = gql`
   {
-    users {
+    list_users {
       id
       email
       name
@@ -93,7 +93,7 @@ export const useCreateUser = () =>
       if (!data?.create_user) return;
       cache.modify({
         fields: {
-          users: (existingUsers = []) => {
+          list_users: (existingUsers = []) => {
             const newUser = cache.writeFragment({
               data: data.create_user,
               fragment: gql`
