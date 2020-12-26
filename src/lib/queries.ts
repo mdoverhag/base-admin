@@ -69,15 +69,16 @@ export const useGetUser = (id: string) =>
 const CREATE_USER = gql`
   mutation($email: String!, $role: String, $name: String) {
     create_user(email: $email, role: $role, name: $name) {
+      id
       email
+      role
+      name
     }
   }
 `;
 
 interface CreateUserData {
-  create_user: {
-    email: string;
-  };
+  create_user: User;
 }
 
 interface CreateUserVariables {
@@ -87,20 +88,43 @@ interface CreateUserVariables {
 }
 
 export const useCreateUser = () =>
-  useMutation<CreateUserData, CreateUserVariables>(CREATE_USER);
+  useMutation<CreateUserData, CreateUserVariables>(CREATE_USER, {
+    update: (cache, { data }) => {
+      if (!data?.create_user) return;
+      cache.modify({
+        fields: {
+          users: (existingUsers = []) => {
+            const newUser = cache.writeFragment({
+              data: data.create_user,
+              fragment: gql`
+                fragment NewUser on Users {
+                  id
+                  email
+                  role
+                  name
+                }
+              `,
+            });
+            return [...existingUsers, newUser];
+          },
+        },
+      });
+    },
+  });
 
 const UPDATE_USER = gql`
   mutation($id: ID!, $email: String, $role: String, $name: String) {
     update_user(id: $id, email: $email, role: $role, name: $name) {
       id
+      email
+      role
+      name
     }
   }
 `;
 
 interface UpdateUserData {
-  update_user: {
-    id: string;
-  };
+  update_user: User;
 }
 
 interface UpdateUserVariables {
