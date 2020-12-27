@@ -12,7 +12,7 @@ import FormSection from "components/FormSection";
 import FormText from "components/FormText";
 
 import history from "lib/history";
-import { useGetUser, useUpdateUser } from "lib/queries";
+import { useGetUser, useUpdateUser, useDeleteUser } from "lib/queries";
 
 interface UpdateUserRouteParams {
   id: string;
@@ -22,11 +22,17 @@ const UpdateUser: React.FC = () => {
   const { id } = useParams<UpdateUserRouteParams>();
   const { loading, error, data } = useGetUser(id);
   const [updateUser, { data: userDataUpdated }] = useUpdateUser();
+  const [deleteUser, { data: userDeleted }] = useDeleteUser();
   useEffect(() => {
     if (userDataUpdated && userDataUpdated.update_user.id) {
       history.push("/users");
     }
   }, [userDataUpdated]);
+  useEffect(() => {
+    if (userDeleted && userDeleted.delete_user.id) {
+      history.push("/users");
+    }
+  }, [userDeleted]);
   if (loading) return <span>Loading...</span>;
   if (error) return <span>{`Error! ${error.message}`}</span>;
   if (!(data && data.get_user)) return <span>{`Error! No data from API`}</span>;
@@ -62,6 +68,7 @@ const UpdateUser: React.FC = () => {
             </FormSection>
             <Divider />
             <FormButtons
+              onDelete={() => deleteUser({ variables: { id: values.id } })}
               onCancel={() => history.push("/users")}
               submitLabel="Update User"
             />

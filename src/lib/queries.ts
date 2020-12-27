@@ -1,4 +1,4 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useQuery, useMutation, Reference } from "@apollo/client";
 
 interface GetVersionData {
   get_version: {
@@ -136,3 +136,34 @@ interface UpdateUserVariables {
 
 export const useUpdateUser = () =>
   useMutation<UpdateUserData, UpdateUserVariables>(UPDATE_USER);
+
+const DELETE_USER = gql`
+  mutation($id: ID!) {
+    delete_user(id: $id) {
+      id
+    }
+  }
+`;
+
+interface DeleteUserData {
+  delete_user: Pick<User, "id">;
+}
+
+interface DeleteUserVariables {
+  id: string;
+}
+
+export const useDeleteUser = () =>
+  useMutation<DeleteUserData, DeleteUserVariables>(DELETE_USER, {
+    update: (cache, { data }) => {
+      if (!data?.delete_user) return;
+      cache.modify({
+        fields: {
+          list_users: (existingUsers: Reference[] = [], { readField }) =>
+            existingUsers.filter(
+              (userRef) => readField("id", userRef) !== data.delete_user.id
+            ),
+        },
+      });
+    },
+  });
